@@ -34,14 +34,10 @@ jobs:
       - name: Print GitHub Environment Variables (vars)
         run: |
           echo "---- GitHub Environment Variables (snowflake-odw-dev) ----"
-          echo "SNOWFLAKE_ACCOUNT=${{ vars.SNOWFLAKE_ACCOUNT }}"
-          echo "SNOWFLAKE_DATABASE=${{ vars.SNOWFLAKE_DATABASE }}"
-          echo "SNOWFLAKE_SCHEMA=${{ vars.SNOWFLAKE_SCHEMA }}"
-          echo "SNOWFLAKE_WAREHOUSE=${{ vars.SNOWFLAKE_WAREHOUSE }}"
-          echo "SNOWFLAKE_ROLE=${{ vars.SNOWFLAKE_ROLE }}"
-          echo "AWS_REGION=${{ vars.AWS_REGION }}"
-          echo "AWS_ROLE_ARN=${{ vars.AWS_ROLE_ARN }}"
-
+          echo "DEPLOY_ENV=${{ vars.DEPLOY_ENV }}"
+          echo "SNOWFLAKE_TIER=${{ vars.SNOWFLAKE_TIER }}"
+          echo "TEAM=${{ vars.TEAM }}"
+          
       - name: Print all runtime environment variables (system)
         run: |
           echo "---- System Variables ----"
