@@ -1,0 +1,45 @@
+name: CI (Release Folder Only - Print Env)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "release/**"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "release/**"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # 👇 Set the GitHub Environment here
+    environment: snowflake-odw-dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Print basic context
+        run: |
+          echo "Workflow triggered by release/ folder change"
+          echo "GitHub Ref: $GITHUB_REF"
+          echo "GitHub SHA: $GITHUB_SHA"
+          echo "Environment Name: snowflake-odw-dev"
+
+      - name: Print GitHub Environment Variables (non-secret)
+        run: |
+          echo "---- GitHub Vars ----"
+          echo "SNOWFLAKE_ACCOUNT=${{ vars.SNOWFLAKE_ACCOUNT }}"
+          echo "SNOWFLAKE_DATABASE=${{ vars.SNOWFLAKE_DATABASE }}"
+          echo "SNOWFLAKE_ROLE=${{ vars.SNOWFLAKE_ROLE }}"
+          echo "AWS_REGION=${{ vars.AWS_REGION }}"
+          echo "AWS_ROLE_ARN=${{ vars.AWS_ROLE_ARN }}"
+
+      - name: Print all runtime environment variables (safe view)
+        run: |
+          echo "---- System Environment Variables ----"
+          printenv | sort
